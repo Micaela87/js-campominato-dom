@@ -31,11 +31,12 @@ const levelButtons = document.querySelectorAll('button');
 // global variables
 let newSquares = [];
 let onlyBombs = [];
+let arrBombs;
 
 // generates squares according to the value of the button clicked
 // adds click event to each square generated
 const generateSquares = (number) => {
-    let arrBombs = generateBombs(number);
+    arrBombs = generateBombs(number);
     console.log('arrBombs in function', arrBombs);
     for (let i = 1; i <= number; i++) {
         let newDiv = document.createElement('div');
@@ -62,7 +63,7 @@ const generateSquares = (number) => {
         squareContainer.append(newDiv);
     }
 
-    handleClickEvent();
+    handleClickEvent(number);
 }
 
 // generates bombs
@@ -79,22 +80,58 @@ const generateBombs = (range) => {
 }
 
 // handles click event on squares
-const handleClickEvent = () => {
+const handleClickEvent = (number) => {
+    let limit = (number - arrBombs.length);
+    console.log(limit);
+    let counter = 32;
     newSquares.forEach(function(n) {
         n.addEventListener('click', function() {
-            if (onlyBombs.includes(n)) {
-                onlyBombs.forEach(function(x) {
-                    x.classList.add('bomb');
-                    x.children[0].classList.remove('hidden');
-                    console.log('clicked, has bomb');
-                });
-            } else if (!n.classList.contains('clicked-true')){
-                n.classList.add('clicked-true');
-                n.children[0].classList.remove('hidden');
-                console.log('clicked, has not bomb');
-            } 
-        });
+                if (counter < limit) {
+                    showBombs(n, counter, limit);
+                    counter++;
+                    console.log(counter)
+                } else {
+                    endGame(counter, limit);
+                }
+            }
+        );
     });
+}
+
+let hasLost = false;
+
+// shows bombs
+const showBombs = (element, counter, limit) => {
+    if (onlyBombs.includes(element)) {
+        onlyBombs.forEach(function(x) {
+            x.classList.add('bomb');
+            x.children[0].classList.remove('hidden');
+            hasLost = true;
+            endGame(counter, limit);
+        });
+    } else if (!element.classList.contains('clicked-true')) {
+        element.classList.add('clicked-true');
+        element.children[0].classList.remove('hidden');
+    }
+}
+
+// // ends game
+const endGame = (counter, limit) => {
+    const result = document.createElement('div');
+    newSquares.forEach(function(n) {
+        n.removeEventListener('click', function() {
+            showBombs(n);
+        })
+    })
+    if ((counter === limit) && !hasLost) {
+        console.log('hai vinto')
+        // result.append(`Fantastico, hai vinto!`)
+    } else if (hasLost && (counter < limit)) {
+        // result.append(`hai fatto ${counter} tentativi, ma purtroppo hai perso`)
+        console.log(`hai fatto ${counter} tentativi, ma purtroppo hai perso`)
+    }
+
+    document.body.append(result);
 }
 
 // adds click event to each button

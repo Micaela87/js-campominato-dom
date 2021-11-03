@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./public/resources/css/style.css" type="text/css">
+    <title>Campo Minato</title>
+</head>
+<body>
+    <!-- container to choose a level >> hides when a button is clicked -->
+    <div id="buttons" class="container">
+        <div>
+            <h1>Scegli un livello</h1>
+            <button value="100">Facile</button>
+            <button value="81">Medio</button>
+            <button value="49">Difficile</button>
+        </div>
+    </div>
+    <!-- container for the game >> appears when a button is clicked -->
+    <div id="game" class="container hidden">
+        <div class="container-square flex">
+            <!-- new divs with class 'square' go here -->
+        </div>
+    </div>
+    <script src="./public/resources/js/main.js" type="text/javascript"></script>
+</body>
+</html>

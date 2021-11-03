@@ -1,0 +1,91 @@
+/* general rules */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000080;
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+/* general rules for main containers */
+.container {
+    width: 90%;
+    height: 50rem;
+    margin: 3rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* levels */
+h1 {
+    font-size: 2rem;
+    padding: 2rem 0;
+    color: white;
+}
+
+button {
+    background-color: orangered;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: none;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+/* game */
+.container-square {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* square rules for easy level */
+.square {
+    width: calc(100% / 10);
+    height: 4rem;
+    border: 2px solid white;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* square rules for medium level */
+.square-nine {
+    width: calc(100% / 9);
+    height: 4.5rem;
+}
+
+/* square rules for difficult level */
+.square-seven {
+    width: calc(100% / 7);
+    height: 6rem;
+}
+
+/* rule for clicked square */
+.square.clicked-true {
+    background-color: white;
+}
+
+/* rule for div with bomb */
+.square.bomb {
+    background-color: red;
+}
+
+/* hides elements */
+.hidden {
+    display: none;
+}

@@ -85,6 +85,12 @@ button {
     background-color: red;
 }
 
+/* rules for result container */
+#result {
+    color: white;
+    font-size: 1.5rem;
+}
+
 /* hides elements */
 .hidden {
     display: none;

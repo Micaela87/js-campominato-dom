@@ -29,14 +29,13 @@ const squareContainer = document.querySelector('.container-square');
 const levelButtons = document.querySelectorAll('button');
 
 // global variables
-
+let newSquares = [];
+let onlyBombs = [];
 
 // generates squares according to the value of the button clicked
 // adds click event to each square generated
 const generateSquares = (number) => {
     let arrBombs = generateBombs(number);
-    let newSquares = [];
-    let onlyBombs = [];
     console.log('arrBombs in function', arrBombs);
     for (let i = 1; i <= number; i++) {
         let newDiv = document.createElement('div');
@@ -52,6 +51,7 @@ const generateSquares = (number) => {
             newDiv.classList.add('square-seven');
         }
 
+        // checks if newDiv has bomb
         if (arrBombs.includes(i)) {
             onlyBombs.push(newDiv);
             newSquares.push(newDiv);
@@ -62,19 +62,7 @@ const generateSquares = (number) => {
         squareContainer.append(newDiv);
     }
 
-    newSquares.forEach(function(n) {
-        n.addEventListener('click', function() {
-            if (onlyBombs.includes(n)) {
-                onlyBombs.forEach(function(x) {
-                    x.classList.add('bomb');
-                    x.children[0].classList.remove('hidden');
-                });
-            } else {
-                n.classList.add('clicked-true');
-                n.children[0].classList.remove('hidden');
-            } 
-        });
-    });
+    handleClickEvent();
 }
 
 // generates bombs
@@ -88,6 +76,25 @@ const generateBombs = (range) => {
     }
     console.log(arrBombs);
     return arrBombs;
+}
+
+// handles click event on squares
+const handleClickEvent = () => {
+    newSquares.forEach(function(n) {
+        n.addEventListener('click', function() {
+            if (onlyBombs.includes(n)) {
+                onlyBombs.forEach(function(x) {
+                    x.classList.add('bomb');
+                    x.children[0].classList.remove('hidden');
+                    console.log('clicked, has bomb');
+                });
+            } else if (!n.classList.contains('clicked-true')){
+                n.classList.add('clicked-true');
+                n.children[0].classList.remove('hidden');
+                console.log('clicked, has not bomb');
+            } 
+        });
+    });
 }
 
 // adds click event to each button
